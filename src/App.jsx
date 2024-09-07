@@ -88,9 +88,9 @@ function App() {
         <h1 className='text-4xl  text-white font-semibold items-center'><span className='text-green-400'>W</span >ords<span className='text-green-400'>H</span>ub</h1>
         </div>
         <div className="flex justify-center w-3/4 lg:w-1/2 mx-auto">
-          <div className="text-5xl text-white font-bold absolute mt-40 disp1">Stuck with a word ?</div>
-          <div className="text-5xl text-white font-bold absolute mt-40 disp2">We got you covered</div>
-          <div className="text-5xl text-white font-bold absolute mt-40 disp3">Type in the word you want to search</div>
+          <div className="text-5xl text-white font-bold absolute mt-40 mx-4 lg:mx-0 disp1">Stuck with a word ?</div>
+          <div className="text-5xl text-white font-bold absolute mt-40 mx-4 lg:mx-0 disp2">We got you covered</div>
+          <div className="text-5xl text-white font-bold absolute mt-40 mx-4 lg:mx-0 disp3">Type in the word you want to search</div>
         </div>
         <div className="flex justify-center ipBox">
           <input type="text" onChange={(e)=>{setquery(e.target.value)}} className='mt-80 w-3/4 md:w-3/5 lg:w-1/5 bg-gray-700 border-slate-50 border rounded-md h-12 text-lg text-white px-3 ' placeholder='Enter your word here...'/>
