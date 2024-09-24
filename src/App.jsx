@@ -13,6 +13,7 @@ function App() {
   const [resObj, setresObj] = useState({});
   const [searched, setsearched] = useState(false);
   const [found, setfound] = useState(false);
+  const [resImgs, setresImgs] = useState([])
   useGSAP(()=>{
     const tl= gsap.timeline();
     tl.from('h1',{
@@ -78,6 +79,19 @@ function App() {
       setfound(false);
       console.log(err);
     })
+    setresImgs([]);
+    const api_key="XaWUE1sRwqYbg7cfIbj8Gx_IjGnapF0sn-VgYdlNx50"
+   axios.get(`https://api.unsplash.com/search/photos?page=1&per_page=2&query=${query}&client_id=${api_key}`)
+   .then((response)=>{
+    setresImgs(response.data.results);
+    
+   })
+  }
+  const handleKeyPress = (event) => {
+    // look for the `Enter` keyCode
+    if (event.keyCode === 13 || event.which === 13) {
+      fetchData();
+    }
   }
 
   return (
@@ -93,7 +107,7 @@ function App() {
           <div className="text-5xl text-white font-bold absolute mt-40 mx-4 lg:mx-0 disp3">Type in the word you want to search</div>
         </div>
         <div className="flex justify-center ipBox">
-          <input type="text" onChange={(e)=>{setquery(e.target.value)}} className='mt-80 w-3/4 md:w-3/5 lg:w-1/5 bg-gray-700 border-slate-50 border rounded-md h-12 text-lg text-white px-3 ' placeholder='Enter your word here...'/>
+          <input type="text" onChange={(e)=>{setquery(e.target.value)}} onKeyDown={handleKeyPress} className='mt-80 w-3/4 md:w-3/5 lg:w-1/5 bg-gray-700 border-slate-50 border rounded-md h-12 text-lg text-white px-3 ' placeholder='Enter your word here...'/>
         </div>
        <div className="flex justify-center mt-10 ipBox">
        <button className='bg-green-400 text-white py-3 px-5 rounded-3xl font-semibold' onClick={fetchData}>Search <FontAwesomeIcon icon={faMagnifyingGlass}  /></button>
@@ -117,6 +131,12 @@ function App() {
             return <div className='pr-1' key={index}>{index==0?(<span></span>):(<span>|</span>)} {antonym}</div>
           })}</div>
           }
+          <div className='flex flex-col'>
+          {resImgs.length===0?<h3>Sorry! No images were found</h3>:<h3></h3>}
+           {resImgs.map((img)=>(
+            <img key={img.id} src={img.urls.thumb} alt={img.alt_description} className='mt-8' />
+          ))}
+          </div>
        </div>}
       </div>
     </>
